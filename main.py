@@ -52,18 +52,18 @@ def main():
 
     logging.info('Загрузка результатов...')
     while True:
-        ActionChains(browser).move_to_element(result_list[-1]).perform()
+        ActionChains(browser).scroll_to_element(result_list[-1]).perform()
         if len(result_list) % 25 == 0:
             time.sleep(7)
         if results == len(browser.find_elements(By.CLASS_NAME, 'search-snippet-view')):
-            ActionChains(browser).move_to_element(result_list[0]).perform()
+            ActionChains(browser).scroll_to_element(result_list[0]).perform()
             break
         result_list = browser.find_elements(By.CLASS_NAME, 'search-snippet-view')
         results = len(result_list)
     logging.info(f'По запросу {query} найдено {len(result_list)}')
     for element in result_list:
         try:
-            ActionChains(browser).move_to_element(element).perform()
+            ActionChains(browser).scroll_to_element(element).perform()
             element.find_element(By.CLASS_NAME, 'search-business-snippet-view__title').click()
         except Exception as e:
             logging.error(e)
